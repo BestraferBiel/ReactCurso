@@ -1,4 +1,6 @@
 import { Fragment } from "react";
+// como usar las propiedades de un componente
+import PropTypes from 'prop-types';
 
 const newMensaje = 'Estamos probando esto de React';
 // Como usar o enviar objetos a un componente
@@ -33,13 +35,33 @@ export const FirstApp = () => {
 }
 
 
-export const SeApp = ({title}) => {
+export const SeApp = ({title,subtitle,name}) => {
 
+    if(!title){
+        throw new Error('El titulo es necesario');
+    }
     return(
         <>
-        <h1>{title}</h1>        
+        <h1>{title}</h1> 
+        <p>{subtitle}</p> 
+        <p>{name}</p>      
         <p>Esto es el uso de props</p>
         </>
     );
 
 }
+
+SeApp.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+};
+
+// Propiedades por defecto esto ya no se usa es mejor pasar las propiedades por defecto en el componente
+SeApp.defaultProps = {
+
+    title: 'Soy un titulo por defecto',
+    subtitle: 123,
+    name: 'Gabriel Cabrera '
+
+};
